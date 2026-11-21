@@ -1,17 +1,78 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-theme="paper">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tài liệu Tiếng Anh — Mr. Anh Đinh</title>
+  <title>Báo giá Tài liệu Tiếng Anh — Mr. Anh Đinh</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; transition: background-color 0.2s ease, color 0.2s ease; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Theme: Paper (Default - dịu mắt hơi vàng) */
+    html[data-theme="paper"] body { background-color: #faf4e4; color: #2d251b; }
+    html[data-theme="paper"] header,
+    html[data-theme="paper"] #cartBar,
+    html[data-theme="paper"] #emptyState,
+    html[data-theme="paper"] #checkoutModal > div { background-color: #fffcf3 !important; border-color: #e7dcc4 !important; }
+    html[data-theme="paper"] #checkoutModal .bg-slate-50 { background-color: #f6eedb !important; border-color: #e7dcc4 !important; }
+    html[data-theme="paper"] #searchInput,
+    html[data-theme="paper"] #priceFilterGroup,
+    html[data-theme="paper"] #themeSwitcher { background-color: #f2e8d2 !important; }
+    html[data-theme="paper"] #searchInput:focus { background-color: #fffdf7 !important; border-color: #8b7355 !important; }
+    html[data-theme="paper"] .text-slate-900 { color: #241d15 !important; }
+    html[data-theme="paper"] .text-slate-700,
+    html[data-theme="paper"] .text-slate-600 { color: #544738 !important; }
+    html[data-theme="paper"] .text-slate-500 { color: #756552 !important; }
+    html[data-theme="paper"] .border-slate-200,
+    html[data-theme="paper"] .border-slate-100 { border-color: #e7dcc4 !important; }
+    html[data-theme="paper"] #catalogGrid article { background-color: #fffcf4; }
+
+    /* Theme: Dark Blue */
+    html[data-theme="dark-blue"] body { background-color: #0b132b; color: #e2e8f0; }
+    html[data-theme="dark-blue"] header,
+    html[data-theme="dark-blue"] #cartBar,
+    html[data-theme="dark-blue"] #emptyState,
+    html[data-theme="dark-blue"] #checkoutModal > div { background-color: #111d3c !important; border-color: #243561 !important; color: #e2e8f0 !important; }
+    html[data-theme="dark-blue"] #checkoutModal .bg-slate-50,
+    html[data-theme="dark-blue"] #checkoutModal .bg-slate-50\/50,
+    html[data-theme="dark-blue"] #checkoutModal .bg-indigo-50\/70 { background-color: #162447 !important; border-color: #263968 !important; }
+    html[data-theme="dark-blue"] #searchInput,
+    html[data-theme="dark-blue"] #priceFilterGroup,
+    html[data-theme="dark-blue"] #themeSwitcher,
+    html[data-theme="dark-blue"] #teacherNameInput,
+    html[data-theme="dark-blue"] #teacherPhoneInput,
+    html[data-theme="dark-blue"] #orderPreview { background-color: #18274d !important; color: #f1f5f9 !important; border-color: #2a3f73 !important; }
+    html[data-theme="dark-blue"] #searchInput::placeholder,
+    html[data-theme="dark-blue"] #teacherNameInput::placeholder,
+    html[data-theme="dark-blue"] #teacherPhoneInput::placeholder { color: #94a3b8 !important; }
+    html[data-theme="dark-blue"] .price-btn.bg-white,
+    html[data-theme="dark-blue"] .theme-btn.bg-white { background-color: #2563eb !important; color: #ffffff !important; }
+    html[data-theme="dark-blue"] .group-tab.bg-slate-100 { background-color: #18274d !important; color: #cbd5e1 !important; }
+    html[data-theme="dark-blue"] .group-tab.bg-slate-100:hover { background-color: #223566 !important; }
+    html[data-theme="dark-blue"] .cat-tab.bg-white { background-color: #18274d !important; color: #cbd5e1 !important; border-color: #2a3f73 !important; }
+    html[data-theme="dark-blue"] .cat-tab.bg-indigo-50 { background-color: #1e3a8a !important; color: #bfdbfe !important; border-color: #3b82f6 !important; }
+    html[data-theme="dark-blue"] .text-slate-900,
+    html[data-theme="dark-blue"] .text-slate-800 { color: #f8fafc !important; }
+    html[data-theme="dark-blue"] .text-slate-700,
+    html[data-theme="dark-blue"] .text-slate-600 { color: #cbd5e1 !important; }
+    html[data-theme="dark-blue"] .text-slate-500 { color: #94a3b8 !important; }
+    html[data-theme="dark-blue"] .text-indigo-600 { color: #60a5fa !important; }
+    html[data-theme="dark-blue"] .border-slate-200,
+    html[data-theme="dark-blue"] .border-slate-100 { border-color: #243561 !important; }
+    html[data-theme="dark-blue"] #catalogGrid article { background-color: #142244 !important; border-color: #263b6e !important; }
+    html[data-theme="dark-blue"] #catalogGrid article.ring-2 { border-color: #60a5fa !important; background-color: #192b56 !important; }
+    html[data-theme="dark-blue"] #catalogGrid article a.bg-white,
+    html[data-theme="dark-blue"] #catalogGrid article button.bg-white { background-color: #1c2e59 !important; color: #e2e8f0 !important; border-color: #324a85 !important; }
+    html[data-theme="dark-blue"] #catalogGrid article a.bg-white:hover,
+    html[data-theme="dark-blue"] #catalogGrid article button.bg-white:hover { background-color: #243b70 !important; }
+    html[data-theme="dark-blue"] #catalogGrid article span.bg-white\/70 { background-color: #17264b !important; color: #64748b !important; border-color: #253866 !important; }
+    html[data-theme="dark-blue"] #scrollTopBtn { background-color: #1c2e59 !important; color: #e2e8f0 !important; }
+    html[data-theme="dark-blue"] #syncBadge { background-color: #18274d !important; color: #93c5fd !important; border-color: #2a3f73 !important; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen pb-28">
@@ -28,7 +89,12 @@
         </div>
         <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Chọn nhanh bộ đề, xem bản demo trực tiếp và tạo mã VietQR thanh toán trong 1 chạm.</p>
       </div>
-      <div class="flex items-center gap-2 self-start sm:self-auto">
+      <div class="flex items-center gap-2 flex-wrap self-start sm:self-auto">
+        <div id="themeSwitcher" class="inline-flex rounded-xl bg-slate-100 p-1" role="group" aria-label="Chọn giao diện">
+          <button type="button" data-theme-val="paper" class="theme-btn px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-900 shadow-sm transition">Paper</button>
+          <button type="button" data-theme-val="blue-white" class="theme-btn px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 transition">Sáng</button>
+          <button type="button" data-theme-val="dark-blue" class="theme-btn px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 transition">Dark Blue</button>
+        </div>
         <a href="https://zalo.me/0765822911" target="_blank" rel="noopener noreferrer"
            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-medium transition shadow-sm">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
@@ -317,6 +383,7 @@
       toast: document.getElementById("toast"),
       syncDot: document.getElementById("syncDot"),
       syncBadgeText: document.getElementById("syncBadgeText"),
+      themeSwitcher: document.getElementById("themeSwitcher"),
       teacherNameInput: document.getElementById("teacherNameInput"),
       teacherPhoneInput: document.getElementById("teacherPhoneInput"),
       qrAddInfoLabel: document.getElementById("qrAddInfoLabel")
@@ -735,6 +802,33 @@
         el.syncDot.className = "w-1.5 h-1.5 rounded-full bg-slate-400";
         el.syncBadgeText.textContent = `Đang dùng dữ liệu dự phòng (${MATERIALS.length} tài liệu)`;
       }
+    }
+
+    function applyTheme(theme) {
+      const valid = ["paper", "blue-white", "dark-blue"];
+      const chosen = valid.includes(theme) ? theme : "paper";
+      document.documentElement.setAttribute("data-theme", chosen);
+      document.querySelectorAll(".theme-btn").forEach(btn => {
+        const active = btn.dataset.themeVal === chosen;
+        btn.className = active
+          ? "theme-btn px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-900 shadow-sm transition"
+          : "theme-btn px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 transition";
+      });
+      try {
+        localStorage.setItem("tlta_theme", chosen);
+      } catch (e) {}
+    }
+
+    el.themeSwitcher.addEventListener("click", e => {
+      const btn = e.target.closest(".theme-btn");
+      if (!btn) return;
+      applyTheme(btn.dataset.themeVal);
+    });
+
+    try {
+      applyTheme(localStorage.getItem("tlta_theme") || "paper");
+    } catch (e) {
+      applyTheme("paper");
     }
 
     // Init
