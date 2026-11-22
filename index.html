@@ -72,6 +72,13 @@
     html[data-theme="dark-blue"] #catalogGrid article button.bg-white:hover { background-color: #243b70 !important; }
     html[data-theme="dark-blue"] #catalogGrid article span.bg-white\/70 { background-color: #17264b !important; color: #64748b !important; border-color: #253866 !important; }
     html[data-theme="dark-blue"] #scrollTopBtn { background-color: #1c2e59 !important; color: #e2e8f0 !important; }
+    html[data-theme="dark-blue"] #promoBanner { background: linear-gradient(90deg, #3a2a10, #3b1f1a) !important; border-color: #a16207 !important; }
+    html[data-theme="dark-blue"] #promoBanner .text-amber-900 { color: #fde68a !important; }
+    html[data-theme="dark-blue"] #promoBanner .promo-sub { color: #fcd34d !important; }
+    html[data-theme="dark-blue"] #promoBanner .promo-chip { background-color: #1c2e59 !important; border-color: #a16207 !important; }
+    html[data-theme="dark-blue"] #promoBanner .text-rose-600 { color: #fb7185 !important; }
+    html[data-theme="dark-blue"] #cartNudgeText,
+    html[data-theme="dark-blue"] #bdNudge { color: #fcd34d !important; background-color: transparent !important; border-color: #a16207 !important; }
     html[data-theme="dark-blue"] #syncBadge { background-color: #18274d !important; color: #93c5fd !important; border-color: #2a3f73 !important; }
   </style>
 </head>
@@ -127,6 +134,27 @@
 
   <!-- Main Content -->
   <main class="max-w-6xl mx-auto px-4 sm:px-6 py-5">
+    <!-- Promo Banner: ưu đãi mua nhiều bộ -->
+    <div id="promoBanner" class="mb-4 rounded-2xl border border-amber-300 bg-gradient-to-r from-amber-50 via-orange-50 to-rose-50 px-4 py-3 sm:px-5 sm:py-4 flex flex-col sm:flex-row sm:items-center gap-3">
+      <div class="flex items-center gap-3 flex-1 min-w-0">
+        <span class="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-xl bg-amber-400 text-white text-xl" aria-hidden="true">🎁</span>
+        <div class="min-w-0">
+          <p class="text-sm sm:text-base font-bold text-amber-900">Ưu đãi cho thầy cô mua nhiều bộ</p>
+          <p class="promo-sub text-xs sm:text-sm text-amber-800">Tự động áp dụng khi tạo mã VietQR, không cần nhập mã. Áp dụng cho tài liệu trả phí.</p>
+        </div>
+      </div>
+      <div class="flex gap-2 shrink-0">
+        <span class="promo-chip inline-flex flex-col items-center px-3 py-1.5 rounded-xl bg-white border border-amber-300 text-amber-900">
+          <span class="text-[11px] font-medium leading-tight">Mua 2 bộ</span>
+          <span class="text-base font-extrabold leading-tight text-rose-600">-5%</span>
+        </span>
+        <span class="promo-chip inline-flex flex-col items-center px-3 py-1.5 rounded-xl bg-white border border-amber-300 text-amber-900">
+          <span class="text-[11px] font-medium leading-tight">Từ 3 bộ</span>
+          <span class="text-base font-extrabold leading-tight text-rose-600">-10%</span>
+        </span>
+      </div>
+    </div>
+
     <div class="flex items-center justify-between mb-4">
       <p id="resultCount" class="text-xs sm:text-sm text-slate-500">Đang hiển thị 33 tài liệu</p>
       <button id="clearFiltersBtn" type="button" class="hidden text-xs font-medium text-indigo-600 hover:text-indigo-700">Xóa bộ lọc</button>
@@ -150,8 +178,10 @@
           <span id="cartCountBadge" class="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700">0 tài liệu</span>
         </div>
         <p class="text-base sm:text-lg font-bold text-slate-900 truncate">
-          Tổng: <span id="cartTotalText" class="text-indigo-600">0 đ</span>
+          Tổng: <span id="cartSubtotalText" class="hidden text-xs sm:text-sm font-medium text-slate-400 line-through mr-1"></span><span id="cartTotalText" class="text-indigo-600">0 đ</span>
+          <span id="cartDiscountBadge" class="hidden align-middle ml-1 px-1.5 py-0.5 rounded-md text-[11px] font-bold bg-rose-100 text-rose-700"></span>
         </p>
+        <p id="cartNudgeText" class="hidden text-[11px] sm:text-xs font-medium text-amber-700 truncate"></p>
       </div>
       <div class="flex items-center gap-2 shrink-0">
         <button id="scrollTopBtn" type="button" title="Lên đầu trang"
@@ -214,6 +244,13 @@
                 <p>STK: 0765 822 911</p>
                 <p>DINH HOANG TUAN ANH</p>
               </div>
+            </div>
+            <!-- Chi tiết giảm giá -->
+            <div id="discountBreakdown" class="w-full mt-3 text-xs space-y-1 text-left">
+              <div class="flex justify-between"><span class="text-slate-500">Tạm tính (<span id="bdPaidCount">0</span> bộ trả phí):</span><span id="bdSubtotal" class="font-medium text-slate-700">0 đ</span></div>
+              <div id="bdDiscountRow" class="hidden flex justify-between text-rose-600 font-semibold"><span id="bdDiscountLabel">Ưu đãi</span><span id="bdDiscount">-0 đ</span></div>
+              <div class="flex justify-between border-t border-slate-200 pt-1"><span class="font-semibold text-slate-700">Thành tiền:</span><strong id="bdTotal" class="text-slate-900">0 đ</strong></div>
+              <p id="bdNudge" class="hidden text-[11px] font-medium text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-2 py-1 mt-1"></p>
             </div>
             <p class="text-xs text-slate-500 mt-2">Số tiền tự động điền: <strong id="qrAmountLabel" class="text-slate-800">0 đ</strong></p>
             <p class="text-[11px] text-slate-500 mt-0.5 break-all">Nội dung CK: <strong id="qrAddInfoLabel" class="text-slate-700">TLTA Mr Anh Dinh</strong></p>
@@ -561,20 +598,89 @@
       return MATERIALS.filter(m => state.selectedIds.has(m.id));
     }
 
+    // Ưu đãi mua nhiều bộ: chỉ tính các bộ TRẢ PHÍ.
+    // Thêm/sửa mốc ưu đãi tại đây (minItems tăng dần).
+    const BULK_DISCOUNT_TIERS = [
+      { minItems: 2, rate: 0.05 },
+      { minItems: 3, rate: 0.10 }
+    ];
+
+    function getDiscountRate(paidCount) {
+      let rate = 0;
+      BULK_DISCOUNT_TIERS.forEach(t => { if (paidCount >= t.minItems) rate = t.rate; });
+      return rate;
+    }
+
+    function calcPricing(selected) {
+      const paidItems = selected.filter(m => m.price > 0);
+      const paidCount = paidItems.length;
+      const subtotal = paidItems.reduce((sum, m) => sum + m.price, 0);
+      const rate = getDiscountRate(paidCount);
+      // Làm tròn tiền giảm LÊN hàng nghìn (có lợi cho GV, số tiền CK gọn)
+      const discount = rate > 0 ? Math.ceil((subtotal * rate) / 1000) * 1000 : 0;
+      const total = subtotal - discount;
+      const nextTier = BULK_DISCOUNT_TIERS.find(t => t.minItems > paidCount) || null;
+      let nudge = "";
+      if (nextTier) {
+        const need = nextTier.minItems - paidCount;
+        nudge = `Chọn thêm ${need} bộ trả phí để được giảm ${Math.round(nextTier.rate * 100)}%`;
+      }
+      return { paidCount, subtotal, rate, discount, total, nudge };
+    }
+
     function updateCartSummary() {
       const selected = getSelectedItems();
-      const total = selected.reduce((sum, m) => sum + m.price, 0);
+      const p = calcPricing(selected);
       el.cartCountBadge.textContent = `${selected.length} tài liệu`;
-      el.cartTotalText.textContent = formatVND(total);
+      el.cartTotalText.textContent = formatVND(p.total);
       el.openCheckoutBtn.disabled = selected.length === 0;
+
+      const subEl = document.getElementById("cartSubtotalText");
+      const badgeEl = document.getElementById("cartDiscountBadge");
+      const nudgeEl = document.getElementById("cartNudgeText");
+      if (p.discount > 0) {
+        subEl.textContent = formatVND(p.subtotal);
+        subEl.classList.remove("hidden");
+        badgeEl.textContent = `-${Math.round(p.rate * 100)}%`;
+        badgeEl.classList.remove("hidden");
+      } else {
+        subEl.classList.add("hidden");
+        badgeEl.classList.add("hidden");
+      }
+      if (p.paidCount > 0 && p.nudge) {
+        nudgeEl.textContent = "🎁 " + p.nudge;
+        nudgeEl.classList.remove("hidden");
+      } else {
+        nudgeEl.classList.add("hidden");
+      }
     }
 
     function renderCheckoutModal() {
       const selected = getSelectedItems();
-      const total = selected.reduce((sum, m) => sum + m.price, 0);
+      const pricing = calcPricing(selected);
+      const total = pricing.total;
 
       el.modalItemCount.textContent = String(selected.length);
       el.qrAmountLabel.textContent = formatVND(total);
+
+      document.getElementById("bdPaidCount").textContent = String(pricing.paidCount);
+      document.getElementById("bdSubtotal").textContent = formatVND(pricing.subtotal);
+      document.getElementById("bdTotal").textContent = formatVND(total);
+      const bdRow = document.getElementById("bdDiscountRow");
+      if (pricing.discount > 0) {
+        document.getElementById("bdDiscountLabel").textContent = `Ưu đãi mua ${pricing.paidCount} bộ (-${Math.round(pricing.rate * 100)}%):`;
+        document.getElementById("bdDiscount").textContent = "-" + formatVND(pricing.discount);
+        bdRow.classList.remove("hidden");
+      } else {
+        bdRow.classList.add("hidden");
+      }
+      const bdNudge = document.getElementById("bdNudge");
+      if (pricing.paidCount > 0 && pricing.nudge) {
+        bdNudge.textContent = "🎁 " + pricing.nudge;
+        bdNudge.classList.remove("hidden");
+      } else {
+        bdNudge.classList.add("hidden");
+      }
 
       if (selected.length === 0) {
         el.checkoutModal.classList.add("hidden");
@@ -615,6 +721,10 @@
       if (teacherName) lines.push(`Giáo viên: ${teacherName}`);
       if (teacherPhone) lines.push(`SĐT / Zalo: ${teacherPhone}`);
       lines.push(...selected.map((item, idx) => `${idx + 1}. [${item.category}] ${item.title} - ${formatVND(item.price)}`));
+      if (pricing.discount > 0) {
+        lines.push(`Tạm tính: ${formatVND(pricing.subtotal)}`);
+        lines.push(`Ưu đãi mua ${pricing.paidCount} bộ (-${Math.round(pricing.rate * 100)}%): -${formatVND(pricing.discount)}`);
+      }
       lines.push(`Tổng cộng: ${formatVND(total)}`);
       lines.push(`Nội dung CK: ${addInfo}`);
       lines.push("Chuyển khoản: Vietinbank 0765 822 911 (DINH HOANG TUAN ANH)");
