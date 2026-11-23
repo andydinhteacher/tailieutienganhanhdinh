@@ -1,0 +1,26 @@
+name: Build Tailwind CSS
+# Tự biên dịch lại tailwind.css mỗi khi index.html thay đổi,
+# để class giao diện mới thêm vào luôn có CSS tương ứng.
+on:
+  push:
+    branches: [main]
+    paths: ["index.html", "tailwind.config.js", "tailwind.input.css"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npx -y tailwindcss@3.4.17 -c tailwind.config.js -i tailwind.input.css -o tailwind.css --minify
+      - name: Commit nếu CSS thay đổi
+        run: |
+          if git diff --quiet -- tailwind.css; then echo "CSS không đổi"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+          git add tailwind.css
+          git commit -m "Tự động build tailwind.css"
+          git push
