@@ -12,6 +12,7 @@
     body { font-family: 'Inter', system-ui, -apple-system, sans-serif; transition: background-color 0.2s ease, color 0.2s ease; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    @media (max-width: 639px) { #cartSubtotalText.sm-only-sub { display: none !important; } }
 
     /* Theme: Paper (Default - dịu mắt hơi vàng) */
     html[data-theme="paper"] body { background-color: #faf4e4; color: #2d251b; }
@@ -174,10 +175,10 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
       <div class="min-w-0">
         <div class="flex items-center gap-2">
-          <span class="text-xs sm:text-sm text-slate-500">Đã chọn:</span>
-          <span id="cartCountBadge" class="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700">0 tài liệu</span>
-          <span id="cartDiscountBadge" class="hidden px-1.5 py-0.5 rounded-md text-[11px] font-bold bg-rose-100 text-rose-700"></span>
-          <span id="cartSubtotalText" class="hidden text-xs font-medium text-slate-400 line-through whitespace-nowrap"></span>
+          <span class="hidden sm:inline text-xs sm:text-sm text-slate-500 whitespace-nowrap">Đã chọn:</span>
+          <span id="cartCountBadge" class="whitespace-nowrap inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700">0 tài liệu</span>
+          <span id="cartDiscountBadge" class="hidden whitespace-nowrap px-1.5 py-0.5 rounded-md text-[11px] font-bold bg-rose-100 text-rose-700"></span>
+          <span id="cartSubtotalText" class="hidden text-xs font-medium text-slate-400 line-through whitespace-nowrap sm-only-sub"></span>
         </div>
         <p class="text-base sm:text-lg font-bold text-slate-900 truncate">
           Tổng: <span id="cartTotalText" class="text-indigo-600">0 đ</span>
@@ -624,7 +625,7 @@
       let nudge = "";
       if (nextTier) {
         const need = nextTier.minItems - paidCount;
-        nudge = `Chọn thêm ${need} bộ trả phí để được giảm ${Math.round(nextTier.rate * 100)}%`;
+        nudge = `Thêm ${need} bộ nữa: giảm ${Math.round(nextTier.rate * 100)}%`;
       }
       return { paidCount, subtotal, rate, discount, total, nudge };
     }
