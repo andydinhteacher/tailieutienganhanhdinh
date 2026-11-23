@@ -832,8 +832,19 @@
       updateCartSummary();
     });
 
+    // Đếm sự kiện trên GoatCounter (không lỗi nếu script bị chặn)
+    function trackEvent(name, title) {
+      try {
+        if (window.goatcounter && window.goatcounter.count) {
+          window.goatcounter.count({ path: name, title: title || name, event: true });
+        }
+      } catch (e) {}
+    }
+
     el.openCheckoutBtn.addEventListener("click", () => {
       if (state.selectedIds.size === 0) return;
+      const paidCount = getSelectedItems().filter(m => m.price > 0).length;
+      trackEvent("xem-don-vietqr", `Xem đơn & VietQR (${paidCount} bộ trả phí)`);
       renderCheckoutModal();
       el.checkoutModal.classList.remove("hidden");
     });
@@ -882,7 +893,7 @@
 
     el.teacherNameInput.addEventListener("input", handleTeacherInfoChange);
     el.teacherPhoneInput.addEventListener("input", handleTeacherInfoChange);
-    el.copyZaloBtn.addEventListener("click", copyOrderText);
+    el.copyZaloBtn.addEventListener("click", () => { trackEvent("copy-don-zalo", "Copy đơn hàng gửi Zalo"); copyOrderText(); });
 
     el.scrollTopBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -953,5 +964,7 @@
     updateCartSummary();
     loadMaterialsFromSheet();
   </script>
+  <!-- GoatCounter: thống kê lượt truy cập (andydinh.goatcounter.com) -->
+  <script data-goatcounter="https://andydinh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
